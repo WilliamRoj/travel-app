@@ -30,3 +30,39 @@ const server = app.listen(port, listening);
     // console.log(server);
     console.log(`running on localhost: ${port}`);
   };
+
+  const feelingsData = {
+        date: 'January',
+        temp: '-20' 
+  }
+
+  app.get('/feelingsData', getFeelingsData)
+
+  function getFeelingsData(req, res){
+      res.send(feelingsData)
+  }
+
+  const data = [];
+
+  app.get('/all', getData)
+
+  function getData(req,res){
+      res.send(projectData)
+      console.log(projectData)
+  }
+
+  //post Route
+
+  app.post('/addFeelings', addFeelings);
+
+  function addFeelings(req,res){
+      newEntry = {
+          date: req.body.date,
+          temp: req.body.temp,
+          feelings: req.body.feelings
+      }
+
+      data.pust(newEntry)
+      res.send(projectData)
+      console.log(projectData)
+  }
