@@ -22,47 +22,35 @@ app.use(cors());
 // Initialize the main project folder
 app.use(express.static('website'));
 
-const port = 8000;
+const port = 3030;
 
 // Setup Server
 const server = app.listen(port, listening);
  function listening(){
-    // console.log(server);
+    console.log('server running');
     console.log(`running on localhost: ${port}`);
   };
 
-  const feelingsData = {
-        date: 'January',
-        temp: '-20' 
+  app.get('/all', sendData);
+
+
+//   GET
+  function sendData(req, res){
+      res.send(projectData);
+      projectData = [];
   }
 
-  app.get('/feelingsData', getFeelingsData)
-
-  function getFeelingsData(req, res){
-      res.send(feelingsData)
-  }
-
-  const data = [];
-
-  app.get('/all', getData)
-
-  function getData(req,res){
-      res.send(projectData)
-      console.log(projectData)
-  }
 
   //post Route
 
-  app.post('/addFeelings', addFeelings);
+  app.post('/add', data);
 
-  function addFeelings(req,res){
+  function data(req,res){
+      console.log(res.body);
       newEntry = {
           date: req.body.date,
           temp: req.body.temp,
           feelings: req.body.feelings
       }
-
-      data.pust(newEntry)
-      res.send(projectData)
-      console.log(projectData)
+      projectData.push(newEntry)
   }
