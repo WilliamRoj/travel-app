@@ -13,7 +13,7 @@ const apiKey = '&appid=8c7790b9840b7363b8f11b6a4051e0c0';
 
         .then(function(data){
             console.log(data);
-            postData('/add', {date:date, temp:data.main.temp, feelings:newFeelings});
+            postData('http://localhost:3030/add', {date:newDate, temp:data.main.temp, feelings:newFeelings});
 
         updateUI()
     })
@@ -53,7 +53,7 @@ const apiKey = '&appid=8c7790b9840b7363b8f11b6a4051e0c0';
             console.log(newData);
             return newData;
         }catch(error) {
-        console.log("error", error);
+        console.log("error", error)
         // appropriately handle the error
         }
     }
@@ -66,7 +66,7 @@ const apiKey = '&appid=8c7790b9840b7363b8f11b6a4051e0c0';
 
 // Update the UI
 const updateUI = async () => {
-    const request = await fetch('/all');
+    const request = await fetch('http://localhost:3030/all');
     try{
       const allData = await request.json();
       document.getElementById('date').innerHTML = `Date - ${allData[0].date}`;
@@ -82,4 +82,4 @@ const updateUI = async () => {
 
 // Create a new date instance dynamically with JS
 let d = new Date();
-let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
+let newDate = (d.getMonth() + 1)+'.'+ d.getDate()+'.'+ d.getFullYear();
