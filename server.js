@@ -47,7 +47,7 @@ app.post('/add', data);
       // console.log(res.body);
         newEntry = {
           date: req.body.date,
-          temp: req.body.main.temp,
+          temp: req.body.temp,
           feelings: req.body.feelings
         }
     projectData = newEntry;

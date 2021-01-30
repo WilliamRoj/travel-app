@@ -7,17 +7,16 @@ const apiKey = '&appid=8c7790b9840b7363b8f11b6a4051e0c0';
   function performAction(e){
     const newZip =  document.getElementById('zip').value;
     const newFeelings = document.getElementById('feelings').value;
-    
-
-        getFeelings(baseURL, newZip, apiKey)
-
-        .then(function(data){
-            console.log(data);
-            postData('http://localhost:3030/add', {date:newDate, temp:data.main.temp, feelings:newFeelings});
-
-        updateUI()
-    })
-
+     getFeelings(baseURL, newZip, apiKey)
+      .then(function(data){
+          console.log(data);
+          postData('http://localhost:3030/add', {
+            date:newDate, 
+            temp:data.main.temp, 
+            feelings:newFeelings});
+     }) .then(function() {
+      updateUI()
+    });
   };
 
   //   Get example
