@@ -1,25 +1,3 @@
-body{
-    background: #fffff8;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
-#app{
-    display: grid;
-    grid-auto-rows: minmax(150px, auto);
-    /* grid-template-columns:  */
-    height:100vh;
-    background: #b9b4b5;
-    color: #f0d43a;
-    justify-content: center;
-    grid-gap: 1em;
-    font-size: 20px;
-    font-family: 'Oswald', sans-serif;
-}
-
-.holder{
-
-}
-
 .entry{
     background: rgba(59, 74, 107, .4);
 }
@@ -44,12 +22,6 @@ body{
 
 }
 
-.headline {
-
-}
-.title{
-
-}
 
 /*  Basic Styling To Override Default For Basic HTML Elements */
 label{
@@ -88,13 +60,7 @@ textarea{
     font-size: 20px;
     font-family: 'Oswald', sans-serif;
 }
-/* Reset style for HTML element on active to have no border*/
-input:focus,
-select:focus,
-textarea:focus,
-button:focus {
-    outline: none;
-}
+
 /* Style for Placeholder Text*/
 ::placeholder { /* Firefox, Chrome, Opera */ 
     color: #f0d43a; 
