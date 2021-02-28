@@ -10,7 +10,7 @@ const apiKey = '&appid=8c7790b9840b7363b8f11b6a4051e0c0';
      getFeelings(baseURL, newZip, apiKey)
       .then(function(data){
           console.log(data);
-          postData('http://localhost:3030/add', {
+          postData('http://localhost:8000/add', {
             date:newDate, 
             temp:data.main.temp, 
             feelings:newFeelings});
@@ -65,7 +65,7 @@ const apiKey = '&appid=8c7790b9840b7363b8f11b6a4051e0c0';
 
 // Update the UI
 const updateUI = async () => {
-    const request = await fetch('http://localhost:3030/all');
+    const request = await fetch('http://localhost:8000/all');
     try{
       const allData = await request.json();
       document.getElementById('date').innerHTML = `Date - ${allData.date}`;

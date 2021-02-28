@@ -7,6 +7,8 @@ const express = require('express');
 // Start up an instance of app
 const app = express();
 
+app.use(express.static('dist'))
+
 /* Dependencies */
 const bodyParser = require('body-parser')
 
@@ -22,7 +24,7 @@ app.use(cors());
 // Initialize the main project folder
 app.use(express.static('website'));
 
-const port = 3030;
+const port = 8000;
 
 // Setup Server
 const server = app.listen(port, listening);
