@@ -1,7 +1,7 @@
 {
-  "name": "weather-journal-app",
+  "name": "travel-app",
   "version": "1.0.0",
-  "description": "Weather Project",
+  "description": "Travel-app Project",
   "main": "server.js",
   "dependencies": {
     "cors": "^2.8.5",
@@ -20,20 +20,22 @@
     "sass-loader": "^11.0.1",
     "style-loader": "^2.0.0",
     "webpack": "^5.24.2",
-    "webpack-cli": "^4.5.0"
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "start:dev": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/WilliamRoj/weather-journal-app.git"
+    "url": "git+https://github.com/WilliamRoj/travel-app.git"
   },
   "author": "William Rojas",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/WilliamRoj/weather-journal-app/issues"
+    "url": "https://github.com/WilliamRoj/travel-app/issues"
   },
-  "homepage": "https://github.com/WilliamRoj/weather-journal-app#readme"
+  "homepage": "https://github.com/WilliamRoj/travel-app#readme"
 }
