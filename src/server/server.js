@@ -48,9 +48,9 @@ app.post('/add', data);
     function data(req, res){
       // console.log(res.body);
         newEntry = {
-          date: req.body.date,
-          temp: req.body.temp,
-          feelings: req.body.feelings
+          latitude: req.body.latitude,
+          longitude: req.body.longitude,
+          country: req.body.country
         }
     projectData = newEntry;
   }

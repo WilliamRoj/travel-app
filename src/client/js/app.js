@@ -1,4 +1,4 @@
-  const baseURL = 'http://api.openweathermap.org/data/2.5/weather?zip='
+  const baseURL = 'api.geonames.org/postalCodeLookupJSON?'
 const apiKey = '&appid=8c7790b9840b7363b8f11b6a4051e0c0';
 
   
@@ -11,9 +11,9 @@ const apiKey = '&appid=8c7790b9840b7363b8f11b6a4051e0c0';
       .then(function(data){
           console.log(data);
           postData('http://localhost:8000/add', {
-            date:newDate, 
-            temp:data.main.temp, 
-            feelings:newFeelings});
+            latitude:newLatitude, 
+            longitude:data.main.longitude, 
+            country:newCountry});
      }) .then(function() {
       updateUI()
     });
@@ -68,9 +68,9 @@ const updateUI = async () => {
     const request = await fetch('http://localhost:8000/all');
     try{
       const allData = await request.json();
-      document.getElementById('date').innerHTML = `Date - ${allData.date}`;
-      document.getElementById('temp').innerHTML = `Temp - ${allData.temp}`;
-      document.getElementById('content').innerHTML = `How i feel - ${allData.feelings}`;
+      document.getElementById('date').innerHTML = `Date - ${allData.latitude}`;
+      document.getElementById('temp').innerHTML = `Temp - ${allData.longitude}`;
+      document.getElementById('content').innerHTML = `How i feel - ${allData.country}`;
   
     }catch(error){
       console.log("error", error);
