@@ -1,12 +1,12 @@
-  const baseURL = 'api.geonames.org/postalCodeLookupJSON?'
-const apiKey = '&appid=8c7790b9840b7363b8f11b6a4051e0c0';
+  const baseURL = 'api.geonames.org/postalCodeLookupJSON?postalcode='
+const apiKey = '=AT&william.ur';
 
   
   document.getElementById('generate').addEventListener('click', performAction);
   
   function performAction(e){
     const newZip =  document.getElementById('zip').value;
-    const newFeelings = document.getElementById('feelings').value;
+    const newDate = document.getElementById('date').value;
      getFeelings(baseURL, newZip, apiKey)
       .then(function(data){
           console.log(data);
