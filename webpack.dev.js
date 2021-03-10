@@ -12,9 +12,9 @@ module.exports = {
         mode: 'production',
         output:{
             path: path.resolve(__dirname, 'dist'),
-            filename: 'app.bundle.js',
+            filename: 'app.js',
             libraryTarget: 'var',
-            library: 'Client',
+            library: 'Client'
         },
         rules: [
             {
