@@ -1,84 +1,22 @@
-  const baseURL = 'api.geonames.org/postalCodeLookupJSON?postalcode='
-const apiKey = '=AT&william.ur';
-
   
-  document.getElementById('generate').addEventListener('click', performAction);
-  
-  function performAction(e){
-    const newZip =  document.getElementById('zip').value;
-    const newDate = document.getElementById('date').value;
-     getFeelings(baseURL, newZip, apiKey)
-      .then(function(data){
-          console.log(data);
-          postData('http://localhost:8000/add', {
-            latitude:newLatitude, 
-            longitude:data.main.longitude, 
-            country:newCountry});
-     }) .then(function() {
-      updateUI()
-    });
-  };
+  app.get('/all', sendData);
 
-  //   Get example
 
- const getFeelings = async (baseURL, newZip, apiKey) =>{
-    //console.log(data);
-      const response = await fetch(baseURL+newZip+apiKey,) 
-       try {
-         const newData = await response.json();
-         console.log(newData);
-         return newData;
-       }catch(error) {
-       console.log("error", error);
-       // appropriately handle the error
-       }
-   }
-
-// post Eample
-    const postData = async ( url = '', data = {})=>{
-        //console.log(data);
-        const response = await fetch(url, {
-        method: 'POST', // GET, POST, PUT, DELETE, etc. 
-        credentials: 'same-origin', // Include, same -origin, omit
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        // Body data type must match "Content-Type" header        
-        body: JSON.stringify(data), // Body data type must match "Content-Type" Header
-        });
-    
-        try {
-            const newData = await response.json();
-            console.log(newData);
-            return newData;
-        }catch(error) {
-        console.log("error", error)
-        // appropriately handle the error
-        }
+  //   GET
+    function sendData(req, res){
+        res.send(projectData);
     }
-
-
-  //////////////////////////
-
-
-
-
-// Update the UI
-const updateUI = async () => {
-    const request = await fetch('http://localhost:8000/all');
-    try{
-      const allData = await request.json();
-      document.getElementById('date').innerHTML = `Date - ${allData.latitude}`;
-      document.getElementById('temp').innerHTML = `Temp - ${allData.longitude}`;
-      document.getElementById('content').innerHTML = `How i feel - ${allData.country}`;
   
-    }catch(error){
-      console.log("error", error);
+  
+    //post Route
+  
+  app.post('/add', data);
+      function data(req, res){
+        // console.log(res.body);
+          newEntry = {
+            latitude: req.body.latitude,
+            longitude: req.body.longitude,
+            country: req.body.country
+          }
+      projectData = newEntry;
     }
-  }
-
-/* Global Variables */
-
-// Create a new date instance dynamically with JS
-let d = new Date();
-let newDate = (d.getMonth() + 1)+'.'+ d.getDate()+'.'+ d.getFullYear();
