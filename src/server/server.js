@@ -32,83 +32,57 @@ const server = app.listen(port, listening);
     console.log('server running');
     console.log(`running on localhost: ${port}`);
   };
+// --------------------
 
-// -------------------------------------------------- //
-  const baseURL = 'http://api.geonames.org/search?q=';
-  const apiKey = '&william.ur';
-  const rows = '&maxRows=10';
+// -----------------Geonames API--------------------------------- //
+const baseURL = 'http://api.geonames.org/search?q=';
+const apiKey = '&william.ur';
+const rows = '&maxRows=10';
+
+let projectData = {};
+
+//   GET
+  app.get('/all', sendData);
+    function sendData(req, res){
+        res.send(projectData);
+    }
+
+    //post Route 
+  app.post('/add', async (req, res) =>{
+    const data = req.body;
+    projectData = data;
+    console.log(projectData);
+    const newCity =  document.getElementById('city').value;
+    const geonamesUrl = await fetch(`${baseURL}${newCity}${apiKey}${rows}`, {
+      method: 'POST'
+  });
+
+  try {
+      const geoData = await geonamesUrl.json();
+      projectData['long'] = geoData.geonames[0].lng;
+      projectData['lat'] = geoData.geonames[0].lat;
+      projectData['countryName'] = geoData.geonames[0].countryName;
+      console.log('Data:', projectData)
+      res.send(projectData);
+  } catch (err) {
+      console.log("error", err);
+  }
   
-    
-    document.getElementById('generate').addEventListener('click', performAction);
-    
-    function performAction(e){
-      const newCity =  document.getElementById('city').value;
-       getFeelings(baseURL, newCity, rows, apiKey)
-        .then(function(data){
-            console.log(data);
-            postData('http://localhost:8000/add', {
-              latitude:newLatitude, 
-              longitude:data.main.longitude, 
-              city:newCity});
-       }) .then(function() {
-        updateUI()
-      });
-    };
-  
-    //   Get example
-  
-   const getFeelings = async (baseURL, newCity, rows, apiKey) =>{
-      //console.log(data);
-        const response = await fetch(baseURL+newCity+rows+apiKey,) 
-         try {
-           const newData = await response.json();
-           console.log(newData);
-           return newData;
-         }catch(error) {
-         console.log("error", error);
-         // appropriately handle the error
-         }
-     }
-  
-  // post Eample
-      const postData = async ( url = '', data = {})=>{
-          //console.log(data);
-          const response = await fetch(url, {
-          method: 'POST', // GET, POST, PUT, DELETE, etc. 
-          credentials: 'same-origin', // Include, same -origin, omit
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          // Body data type must match "Content-Type" header        
-          body: JSON.stringify(data), // Body data type must match "Content-Type" Header
-          });
-      
-          try {
-              const newData = await response.json();
-              console.log(newData);
-              return newData;
-          }catch(error) {
-          console.log("error", error)
-          // appropriately handle the error
-          }
-      }
-  
-  
-    //////////////////////////
+//---------WeatherBit API----------------
   
   
   
   
   // Update the UI
-  const updateUI = async () => {
-      const request = await fetch('http://localhost:8000/all');
-      try{
-        const allData = await request.json();
-        document.getElementById('date').innerHTML = `Date - ${allData.latitude}`;
-        document.getElementById('temp').innerHTML = `Temp - ${allData.longitude}`;
-        document.getElementById('content').innerHTML = `How i feel - ${allData.country}`;
+  // const updateUI = async () => {
+  //     const request = await fetch('http://localhost:8000/all');
+  //     try{
+  //       const allData = await request.json();
+  //       document.getElementById('date').innerHTML = `Date - ${allData.latitude}`;
+  //       document.getElementById('temp').innerHTML = `Temp - ${allData.longitude}`;
+  //       document.getElementById('content').innerHTML = `How i feel - ${allData.country}`;
     
-      }catch(error){
-        console.log("error", error);
-      }
-    }
+  //     }catch(error){
+  //       console.log("error", error);
+  //     }
+  //   }
