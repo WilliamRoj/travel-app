@@ -69,9 +69,43 @@ let projectData = {};
   }
   
 //---------WeatherBit API----------------
+// Example: https://api.weatherbit.io/v2.0/current?lat=35.7796&lon=-78.6382&key=API_KEY&include=minutely
+// https://api.weatherbit.io/v2.0/forecast/daily?city=Raleigh,NC&key=API_KEY
+const weatherBit = 'https://api.weatherbit.io/v2.0/forecast/daily?';
+const bitApiKey = '111feafbd5c04e238b81fb2462059b0b';
+const imperial = '&units=I';
+const language = '&lang=en';
   
-  
-  
+
+  app.get('/getWeatherbit', async (req, res) => {
+    console.log(`latitude is ${projectData.lat}`);
+    console.log(`longitude is ${projectData.long}`);
+    const lat = projectData.lat;
+    const long = projectData.long;
+    const weatherbitURL = `${weatherBit}lat=${lat}&lon=${long}&API_KEY${bitApiKey}${language}${imperial}`;
+    console.log(`Weatherbit URL is ${weatherbitURL}`);
+    try {
+        const response = await fetch(weatherbitURL);
+        
+        //failed data from API,
+        if (!response.ok) {
+            console.log(`Error connecting to Weatherbit API ${response.status}`);
+            res.send(null);
+        }
+        const weatherbitData = await response.json();
+        projectData['icon'] = weatherbitData.data[0].weather.icon;
+        projectData['description'] = weatherbitData.data[0].weather.description;
+        projectData['temp'] = weatherbitData.data[0].temp;
+        res.send(weatherbitData);
+        console.log(weatherbitData);
+        // If error to connection to API
+    } catch (error) {
+        console.log(`Error connecting to server: ${error}`);
+        res.send(null);
+    }
+})
+
+//---------Pixabay API----------------
   
   // Update the UI
   // const updateUI = async () => {
