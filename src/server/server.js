@@ -61,6 +61,7 @@ let projectData = {};
       const geoData = await geonamesUrl.json();
       projectData['long'] = geoData.geonames[0].lng;
       projectData['lat'] = geoData.geonames[0].lat;
+      projectData['name'] = geoData.geonames[0].name;
       projectData['countryName'] = geoData.geonames[0].countryName;
       console.log('Data:', projectData)
       res.send(projectData);
@@ -106,17 +107,58 @@ const language = '&lang=en';
 })
 
 //---------Pixabay API----------------
+// Exmple: https://pixabay.com/api/?key=20700415-2828a58847eba5b3aa52b5e90&q=yellow+flowers&image_type=photo
+const pixabay = 'https://pixabay.com/api/?';
+const pixabayApiKey = 'key=20700415-2828a58847eba5b3aa52b5e90&q=';
+const type = '&image_type=photo';
   
-  // Update the UI
-  // const updateUI = async () => {
-  //     const request = await fetch('http://localhost:8000/all');
-  //     try{
-  //       const allData = await request.json();
-  //       document.getElementById('date').innerHTML = `Date - ${allData.latitude}`;
-  //       document.getElementById('temp').innerHTML = `Temp - ${allData.longitude}`;
-  //       document.getElementById('content').innerHTML = `How i feel - ${allData.country}`;
-    
-  //     }catch(error){
-  //       console.log("error", error);
-  //     }
-  //   }
+app.get('/getPix', async (req, res) => {
+  console.log(`Pixabay: ${projectData.name}`);
+  const city = projectData.name;
+  let pixabayURL = `${pixabay}${pixabayApiKey}${city}${type}`;
+  console.log(`Pixabay URL is ${pixabayURL}`);
+  try {
+      let response = await fetch(pixabayURL);
+      // failed datafrom API
+      if (!response.ok) {
+          console.log(`Error connecting to Pixabay API ${response.status}`);
+          res.send(null);
+      }
+      let pixData = await response.json();
+      projectData['image1'] = pixData.hits[0].webformatURL;
+      projectData['image2'] = pixData.hits[1].webformatURL;
+      projectData['image3'] = pixData.hits[2].webformatURL;
+      res.send(pixData);
+      console.log(image1, image2, image3);
+      image1, image2, image3 = projectData;
+
+      // If no photo was returned for city, get one for the country instead
+      if (responseJSON.total == 0) {
+          const country = projectData.countryName;
+          console.log(`No photo for ${city}. Looking for ${country}.`);
+          pixabayURL = `${pixabay}${country}${pixabayApiKey}${type}`;
+          console.log(`Pixabay country URL is ${pixabayURL}`);
+          response = await fetch(pixabayURL)
+          // failed data from API
+          if (!response.ok) {
+              console.log(`Error connecting to Pixabay ${response.status}`)
+              res.send(null)
+          }
+          responseJSON = await response.json()
+      }
+
+      res.send(responseJSON)
+      // If failed connection to API, return null
+  } catch (error) {
+      console.log(`Error connecting to server: ${error}`)
+      res.send(null)
+  }
+})
+
+app.get('/getData', (req, res) => {
+  console.log(projectData);
+  res.send(projectData);
+  res.json({message: 'Recieved'});
+})
+
+module.exports = app;
