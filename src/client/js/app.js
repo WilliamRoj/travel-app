@@ -9,7 +9,7 @@
    // let d = new Date();
 // let newDate = (d.getMonth() + 1)+'.'+ d.getDate()+'.'+ d.getFullYear();
   await postData("/clientData", {
-      city: city,
+      city: newCity,
       date: date
     });
 
