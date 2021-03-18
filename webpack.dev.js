@@ -9,7 +9,7 @@ module.exports = {
             app:['babel-polyfill',
             './src/client/index.js',]
         },
-        mode: 'production',
+        mode: 'development',
         output:{
             path: path.resolve(__dirname, 'dist'),
             filename: 'bundle.min.js',
@@ -26,7 +26,7 @@ module.exports = {
                     options: {
                         presets: [
                             [
-                                '@babel/preset-env','stage-0', 
+                                '@babel/preset-env', 
                                     { 
                                      targets: "defaults" 
                                 }
@@ -54,11 +54,11 @@ module.exports = {
                     loader: 'file-loader',
                   },
                 ],
-              },
-              {
-                test: /\.html$/i,
-                loader: 'html-loader',
               }
+            //   {
+            //     test: /\.html$/i,
+            //     loader: 'html-loader',
+            //   }
         ]
     },
     plugins: [

@@ -1,7 +1,7 @@
   
  document.getElementById('generate').addEventListener('click', performAction);
     
- function performAction(e){
+async function performAction(e){
    const newCity =  document.getElementById('city').value;
    const date = document.getElementById('start').value
 
