@@ -20,8 +20,6 @@ app.use(bodyParser.json());
 const cors = require('cors');
 app.use(cors());
 
-// Initialize the main project folder
-app.use(express.static('website'));
 
 const port = 8000;
 // Setup Server
@@ -39,7 +37,7 @@ const rows = '&maxRows=10';
 
 //   GET
 app.get('/', function (req, res){
-  res.send(projectData);
+  res.sendFile("dist/index.html");
   });
 
     //post Route 

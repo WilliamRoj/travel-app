@@ -28,10 +28,10 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --output-public-path=/build/",
+    "start": "node src/server/server.js",
     "build-prod": "webpack --config webpack.prod.js",
-    "build-dev": "webpack serve  --config webpack.dev.js --open",
-    "start:dev": "webpack-dev-server"
+    "build-dev": "webpack --config webpack.dev.js",
+    // "start:dev": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
