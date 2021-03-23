@@ -21,7 +21,7 @@ const cors = require('cors');
 app.use(cors());
 
 
-const port = 8000;
+const port = 3000;
 // Setup Server
 const server = app.listen(port, listening);
  function listening(){

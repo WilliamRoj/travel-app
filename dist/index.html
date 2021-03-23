@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Travel App</title>
+<link href="https://fonts.googleapis.com/css?family=Oswald:400,600,700|Ranga:400,700&display=swap" rel="stylesheet">
+<!-- <link rel="stylesheet" href="style.css"> -->
+<script defer src="bundle.min.js"></script><link href="app.css" rel="stylesheet"></head>
+ <body>
+<div id = "app">
+    <div class ="holder headline">
+        Travel App
+    </div>
+    <div class ="holder city">
+        <label for="city">
+            Enter City here
+        </label>
+        <input type="text" id="city" placeholder="enter city here">
+    </div>
+    <div class ="holder date">
+        <label for="start">
+            Start date:
+        </label>
+        <input type="date" id="start" name="trip-start"
+       value="Year-Month-Day"
+       min="2021-01-01" max="2030-12-31">
+        <button id="generate" type = "submit"> 
+            Generate 
+        </button>
+    </div>
+    <div class ="holder entry">
+        <div class = "title">
+            Results
+        </div>
+        <div id = "">
+            <div>
+                <img src="" alt="" class="city-image"/>
+                    <div>
+                        <img src="" alt="" class="image-icon" />
+                        <div class="temp"></div>
+                        <div class="description"></div>          
+                    </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+
+</body>
+</html>
